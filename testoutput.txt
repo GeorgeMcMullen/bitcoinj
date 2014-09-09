@@ -1,0 +1,494 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.google:bitcoinj:jar:0.12-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ com.google:bitcoinj-parent:0.12-SNAPSHOT, /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/pom.xml, line 158, column 19
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.google:bitcoinj-examples:jar:0.12-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ com.google:bitcoinj-parent:0.12-SNAPSHOT, /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/pom.xml, line 158, column 19
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.google:bitcoinj-tools:jar:0.12-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ com.google:bitcoinj-parent:0.12-SNAPSHOT, /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/pom.xml, line 158, column 19
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.subgraph:orchid:jar:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ line 140, column 29
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.google:bitcoinj-parent:pom:0.12-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ line 158, column 19
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Orchid
+[INFO] bitcoinj Parent
+[INFO] bitcoinj
+[INFO] bitcoinj Examples
+[INFO] bitcoinj Tools
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Orchid 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ orchid ---
+[INFO] Deleting /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ orchid ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ orchid ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 231 source files to /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ orchid ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ orchid ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ orchid ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.5:jar (default-jar) @ orchid ---
+[INFO] Building jar: /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target/orchid-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-shade-plugin:2.3:shade (default) @ orchid ---
+[INFO] Including com.google.guava:guava:jar:16.0.1 in the shaded jar.
+[INFO] Attaching shaded artifact.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ orchid ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ orchid ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ orchid ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ orchid ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ orchid ---
+[INFO] No tests to run.
+[INFO] Skipping execution of surefire because it has already been run for this configuration
+[INFO] 
+[INFO] --- maven-jar-plugin:2.5:jar (default-jar) @ orchid ---
+[INFO] 
+[INFO] --- maven-shade-plugin:2.3:shade (default) @ orchid ---
+[INFO] Including com.google.guava:guava:jar:16.0.1 in the shaded jar.
+[INFO] Attaching shaded artifact.
+[INFO] 
+[INFO] --- maven-source-plugin:2.1.2:jar-no-fork (attach-sources) @ orchid ---
+[INFO] Building jar: /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target/orchid-1.0-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.1:install (default-install) @ orchid ---
+[INFO] Installing /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target/orchid-1.0-SNAPSHOT.jar to /Users/george/.m2/repository/com/subgraph/orchid/1.0-SNAPSHOT/orchid-1.0-SNAPSHOT.jar
+[INFO] Installing /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/pom.xml to /Users/george/.m2/repository/com/subgraph/orchid/1.0-SNAPSHOT/orchid-1.0-SNAPSHOT.pom
+[INFO] Installing /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target/orchid-1.0-SNAPSHOT-bundled.jar to /Users/george/.m2/repository/com/subgraph/orchid/1.0-SNAPSHOT/orchid-1.0-SNAPSHOT-bundled.jar
+[INFO] Installing /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/orchid/target/orchid-1.0-SNAPSHOT-sources.jar to /Users/george/.m2/repository/com/subgraph/orchid/1.0-SNAPSHOT/orchid-1.0-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building bitcoinj Parent 0.12-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ bitcoinj-parent ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ bitcoinj-parent ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ bitcoinj-parent ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.1:install (default-install) @ bitcoinj-parent ---
+[INFO] Installing /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/pom.xml to /Users/george/.m2/repository/com/google/bitcoinj-parent/0.12-SNAPSHOT/bitcoinj-parent-0.12-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building bitcoinj 0.12-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ bitcoinj ---
+[INFO] Deleting /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ bitcoinj ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ bitcoinj ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ bitcoinj ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 220 source files to /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target/classes
+[WARNING] bootstrap class path not set in conjunction with -source 1.6
+[WARNING] /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/src/main/java/com/google/bitcoin/store/PostgresFullPrunedBlockStore.java:[812,41] getFromAddress(com.google.bitcoin.core.NetworkParameters) in com.google.bitcoin.script.Script has been deprecated
+[WARNING] /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/src/main/java/com/google/bitcoin/core/ECKey.java: Some input files use unchecked or unsafe operations.
+[WARNING] /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/src/main/java/com/google/bitcoin/core/ECKey.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ bitcoinj ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 19 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ bitcoinj ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 63 source files to /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target/test-classes
+[WARNING] bootstrap class path not set in conjunction with -source 1.6
+[WARNING] /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/src/test/java/com/google/bitcoin/crypto/HDUtilsTest.java: /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/src/test/java/com/google/bitcoin/crypto/HDUtilsTest.java uses unchecked or unsafe operations.
+[WARNING] /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/src/test/java/com/google/bitcoin/crypto/HDUtilsTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ bitcoinj ---
+[INFO] Surefire report directory: /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.google.bitcoin.core.AddressTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.309 sec
+Running com.google.bitcoin.core.AlertMessageTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec
+Running com.google.bitcoin.core.Base58Test
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 sec
+Running com.google.bitcoin.core.BitcoinSerializerTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 sec
+Running com.google.bitcoin.core.BlockChainTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.94 sec
+Running com.google.bitcoin.core.BlockTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 sec
+Running com.google.bitcoin.core.BloomFilterTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running com.google.bitcoin.core.ChainSplitTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.947 sec
+Running com.google.bitcoin.core.CoinbaseBlockTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.055 sec
+Running com.google.bitcoin.core.CoinTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec
+Running com.google.bitcoin.core.DumpedPrivateKeyTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.core.ECKeyTest
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.62 sec
+Running com.google.bitcoin.core.H2FullPrunedBlockChainTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.993 sec
+Running com.google.bitcoin.core.LazyParseByteCacheTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.418 sec
+Running com.google.bitcoin.core.MemoryFullPrunedBlockChainTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.672 sec
+Running com.google.bitcoin.core.MemoryPoolTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Running com.google.bitcoin.core.MessageTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running com.google.bitcoin.core.PeerAddressTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.core.PeerGroupTest
+Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.786 sec
+Running com.google.bitcoin.core.PeerTest
+Tests run: 100, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.658 sec
+Running com.google.bitcoin.core.PostgresFullPrunedBlockChainTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 sec
+Running com.google.bitcoin.core.TransactionBroadcastTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.415 sec
+Running com.google.bitcoin.core.TransactionTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running com.google.bitcoin.core.UtilsTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running com.google.bitcoin.core.VarIntTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.core.VersionMessageTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.core.WalletTest
+Tests run: 80, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.867 sec
+Running com.google.bitcoin.crypto.BIP32Test
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running com.google.bitcoin.crypto.BIP38PrivateKeyTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.984 sec
+Running com.google.bitcoin.crypto.ChildKeyDerivationTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 sec
+Running com.google.bitcoin.crypto.HDUtilsTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running com.google.bitcoin.crypto.KeyCrypterScryptTest
+EncrypterDecrypterTest: Trying random UUIDs for plainText and passwords :................ Done.
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.351 sec
+Running com.google.bitcoin.crypto.MnemonicCodeTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.586 sec
+Running com.google.bitcoin.crypto.X509UtilsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
+Running com.google.bitcoin.net.discovery.SeedPeersTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running com.google.bitcoin.protocols.channels.ChannelConnectionTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.542 sec
+Running com.google.bitcoin.protocols.channels.PaymentChannelClientTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 sec
+Running com.google.bitcoin.protocols.channels.PaymentChannelServerTest
+Tests run: 6, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec <<< FAILURE!
+shouldTruncateTooLargeTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest)  Time elapsed: 0.011 sec  <<< FAILURE!
+java.lang.AssertionError: 
+  Unexpected method call destroyConnection(REMOTE_SENT_INVALID_MESSAGE):
+	at org.easymock.internal.MockInvocationHandler.invoke(MockInvocationHandler.java:45)
+	at org.easymock.internal.ObjectMethodsFilter.invoke(ObjectMethodsFilter.java:73)
+	at com.sun.proxy.$Proxy12.destroyConnection(Unknown Source)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.error(PaymentChannelServer.java:479)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.receiveMessage(PaymentChannelServer.java:462)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServerTest.shouldTruncateTooLargeTimeWindow(PaymentChannelServerTest.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+shouldAcceptDefaultTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest)  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.AssertionError: 
+  Unexpected method call destroyConnection(REMOTE_SENT_INVALID_MESSAGE):
+	at org.easymock.internal.MockInvocationHandler.invoke(MockInvocationHandler.java:45)
+	at org.easymock.internal.ObjectMethodsFilter.invoke(ObjectMethodsFilter.java:73)
+	at com.sun.proxy.$Proxy12.destroyConnection(Unknown Source)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.error(PaymentChannelServer.java:479)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.receiveMessage(PaymentChannelServer.java:462)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServerTest.shouldAcceptDefaultTimeWindow(PaymentChannelServerTest.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+shouldTruncateTooSmallTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest)  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.AssertionError: 
+  Unexpected method call destroyConnection(REMOTE_SENT_INVALID_MESSAGE):
+	at org.easymock.internal.MockInvocationHandler.invoke(MockInvocationHandler.java:45)
+	at org.easymock.internal.ObjectMethodsFilter.invoke(ObjectMethodsFilter.java:73)
+	at com.sun.proxy.$Proxy12.destroyConnection(Unknown Source)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.error(PaymentChannelServer.java:479)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.receiveMessage(PaymentChannelServer.java:462)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServerTest.shouldTruncateTooSmallTimeWindow(PaymentChannelServerTest.java:68)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+shouldAllowExactTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest)  Time elapsed: 0.011 sec  <<< FAILURE!
+java.lang.AssertionError: 
+  Unexpected method call destroyConnection(REMOTE_SENT_INVALID_MESSAGE):
+	at org.easymock.internal.MockInvocationHandler.invoke(MockInvocationHandler.java:45)
+	at org.easymock.internal.ObjectMethodsFilter.invoke(ObjectMethodsFilter.java:73)
+	at com.sun.proxy.$Proxy12.destroyConnection(Unknown Source)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.error(PaymentChannelServer.java:479)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServer.receiveMessage(PaymentChannelServer.java:462)
+	at com.google.bitcoin.protocols.channels.PaymentChannelServerTest.shouldAllowExactTimeWindow(PaymentChannelServerTest.java:115)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+Running com.google.bitcoin.protocols.channels.PaymentChannelStateTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.641 sec
+Running com.google.bitcoin.protocols.payments.PaymentProtocolTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.207 sec
+Running com.google.bitcoin.protocols.payments.PaymentSessionTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 sec
+Running com.google.bitcoin.script.ScriptChunkTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running com.google.bitcoin.script.ScriptTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.309 sec
+Running com.google.bitcoin.store.SPVBlockStoreTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running com.google.bitcoin.store.WalletProtobufSerializerTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.626 sec
+Running com.google.bitcoin.uri.BitcoinURITest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Running com.google.bitcoin.utils.BaseTaggableObjectTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running com.google.bitcoin.utils.BtcFormatTest
+Tests run: 4480, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.881 sec
+Running com.google.bitcoin.utils.ExchangeRateTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.utils.ExponentialBackoffTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.utils.FiatTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.google.bitcoin.utils.MonetaryFormatTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running com.google.bitcoin.wallet.BasicKeyChainTest
+Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.375 sec
+Running com.google.bitcoin.wallet.DefaultCoinSelectorTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.135 sec
+Running com.google.bitcoin.wallet.DefaultRiskAnalysisTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.164 sec
+Running com.google.bitcoin.wallet.DeterministicKeyChainTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.982 sec
+Running com.google.bitcoin.wallet.KeyChainGroupTest
+Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.116 sec
+
+Results :
+
+Failed tests:   shouldTruncateTooLargeTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest): (..)
+  shouldAcceptDefaultTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest): (..)
+  shouldTruncateTooSmallTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest): (..)
+  shouldAllowExactTimeWindow(com.google.bitcoin.protocols.channels.PaymentChannelServerTest): (..)
+
+Tests run: 5049, Failures: 4, Errors: 0, Skipped: 1
+
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] Orchid ............................................ SUCCESS [6.425s]
+[INFO] bitcoinj Parent ................................... SUCCESS [0.133s]
+[INFO] bitcoinj .......................................... FAILURE [1:28.874s]
+[INFO] bitcoinj Examples ................................. SKIPPED
+[INFO] bitcoinj Tools .................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1:35.619s
+[INFO] Finished at: Fri Sep 19 04:19:48 PDT 2014
+[INFO] Final Memory: 26M/400M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.12.4:test (default-test) on project bitcoinj: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.12.4:test (default-test) on project bitcoinj: There are test failures.
+
+Please refer to /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target/surefire-reports for the individual test results.
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:317)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:152)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:555)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:214)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: org.apache.maven.plugin.MojoFailureException: There are test failures.
+
+Please refer to /Users/george/Documents/Projects/CryptoCurrency/MultiCoin/bitcoinj-myfork/bitcoinj/core/target/surefire-reports for the individual test results.
+	at org.apache.maven.plugin.surefire.SurefireHelper.reportExecution(SurefireHelper.java:83)
+	at org.apache.maven.plugin.surefire.SurefirePlugin.writeSummary(SurefirePlugin.java:176)
+	at org.apache.maven.plugin.surefire.SurefirePlugin.handleSummary(SurefirePlugin.java:150)
+	at org.apache.maven.plugin.surefire.AbstractSurefireMojo.executeAfterPreconditionsChecked(AbstractSurefireMojo.java:650)
+	at org.apache.maven.plugin.surefire.AbstractSurefireMojo.execute(AbstractSurefireMojo.java:586)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:106)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	... 19 more
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :bitcoinj
