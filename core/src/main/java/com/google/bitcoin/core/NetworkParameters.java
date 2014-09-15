@@ -73,8 +73,6 @@ public abstract class NetworkParameters implements Serializable {
     protected int addressHeader;
     protected int p2shHeader;
     protected int dumpedPrivateKeyHeader;
-    protected int interval;
-    protected int targetTimespan;
     protected byte[] alertSigningKey;
 
     /**
@@ -124,6 +122,11 @@ public abstract class NetworkParameters implements Serializable {
     public static final int TARGET_TIMESPAN = 14 * 24 * 60 * 60;  // 2 weeks per difficulty cycle, on average.
     public static final int TARGET_SPACING = 10 * 60;  // 10 minutes per block.
     public static final int INTERVAL = TARGET_TIMESPAN / TARGET_SPACING;
+
+    // These are the default parameters for targetTimespan, targetSpacing, and interval, though each network can have its own.
+    protected int targetTimespan = TARGET_TIMESPAN;
+    protected int targetSpacing = TARGET_SPACING;
+    protected int interval = INTERVAL;
     
     /**
      * Blocks with a timestamp after this should enforce BIP 16, aka "Pay to script hash". This BIP changed the
@@ -328,7 +331,17 @@ public abstract class NetworkParameters implements Serializable {
         return true;
     }
 
-    /** How many blocks pass between difficulty adjustment periods. Bitcoin standardises this to be 2015. */
+    /** How much time passes between difficulty adjustment periods. Bitcoin standardizes this to be about 2 weeks. */
+    public int getTargetTimespan(int height) {
+    	return targetTimespan;
+    }
+
+    /** How much time should typically pass between blocks. Bitcoin standardizes this to be about 10 minutes. */
+    public int getTargetSpacing() {
+    	return targetSpacing;
+    }
+
+    /** How many blocks pass between difficulty adjustment periods. Bitcoin standardizes this to be 2015. */
     public int getInterval() {
         return interval;
     }

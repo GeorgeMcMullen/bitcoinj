@@ -900,7 +900,7 @@ public abstract class AbstractBlockChain {
         final long timeDelta = next.getTimeSeconds() - prev.getTimeSeconds();
         // There is an integer underflow bug in bitcoin-qt that means mindiff blocks are accepted when time
         // goes backwards.
-        if (timeDelta >= 0 && timeDelta <= NetworkParameters.TARGET_SPACING * 2) {
+        if (timeDelta >= 0 && timeDelta <= params.getTargetSpacing() * 2) {
             // Walk backwards until we find a block that doesn't have the easiest proof of work, then check
             // that difficulty is equal to that one.
             StoredBlock cursor = storedPrev;
