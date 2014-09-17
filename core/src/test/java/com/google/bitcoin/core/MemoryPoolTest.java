@@ -39,9 +39,9 @@ public class MemoryPoolTest {
         tx1 = FakeTxBuilder.createFakeTx(params, COIN, new ECKey().toAddress(params));
         tx2 = new Transaction(params, tx1.bitcoinSerialize());
 
-        address1 = new PeerAddress(InetAddress.getByAddress(new byte[] { 127, 0, 0, 1 }));
-        address2 = new PeerAddress(InetAddress.getByAddress(new byte[] { 127, 0, 0, 2 }));
-        address3 = new PeerAddress(InetAddress.getByAddress(new byte[] { 127, 0, 0, 3 }));
+        address1 = new PeerAddress(InetAddress.getByAddress(new byte[] { 127, 0, 0, 1 }), params);
+        address2 = new PeerAddress(InetAddress.getByAddress(new byte[] { 127, 0, 0, 2 }), params);
+        address3 = new PeerAddress(InetAddress.getByAddress(new byte[] { 127, 0, 0, 3 }), params);
     }
 
     @Test

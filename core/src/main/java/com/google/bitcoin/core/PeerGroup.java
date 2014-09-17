@@ -619,9 +619,9 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
         inactives.offer(peerAddress);
     }
 
-    /** Convenience method for addAddress(new PeerAddress(address, params.port)); */
+    /** Convenience method for addAddress(new PeerAddress(address, params.port, params.protocolVersion)); */
     public void addAddress(InetAddress address) {
-        addAddress(new PeerAddress(address, params.getPort()));
+        addAddress(new PeerAddress(address, params.getPort(), params.getProtocolVersion()));
     }
 
     /**
@@ -647,7 +647,7 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
         for (PeerDiscovery peerDiscovery : peerDiscoverers) {
             InetSocketAddress[] addresses;
             addresses = peerDiscovery.getPeers(5, TimeUnit.SECONDS);
-            for (InetSocketAddress address : addresses) addressSet.add(new PeerAddress(address));
+            for (InetSocketAddress address : addresses) addressSet.add(new PeerAddress(address, params.getProtocolVersion()));
             if (addressSet.size() > 0) break;
         }
         lock.lock();
@@ -970,7 +970,7 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
      */
     @Nullable
     public Peer connectTo(InetSocketAddress address) {
-        PeerAddress peerAddress = new PeerAddress(address);
+        PeerAddress peerAddress = new PeerAddress(address, params.getProtocolVersion());
         backoffMap.put(peerAddress, new ExponentialBackoff(peerBackoffParams));
         return connectTo(peerAddress, true, vConnectTimeoutMillis);
     }

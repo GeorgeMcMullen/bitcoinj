@@ -83,16 +83,18 @@ public class PeerAddress extends ChildMessage {
     }
 
     /**
-     * Constructs a peer address from the given IP address and port. Protocol version is the default.
+     * Constructs a peer address from the given IP address and port. Protocol version is the default for the Bitcoin prodnet.
+     * This should be deprecated in favor of always sending the protocolVersion.
      */
     public PeerAddress(InetAddress addr, int port) {
-        this(addr, port, NetworkParameters.PROTOCOL_VERSION);
+     	this(addr, port, MainNetParams.get().getProtocolVersion());
     }
 
     /**
-     * Constructs a peer address from the given IP address. Port and protocol version are default for the prodnet.
-     */
-    public PeerAddress(InetAddress addr) {
+     * Constructs a peer address from the given IP address. Port and Protocol version is the default for the Bitcoin prodnet.
+     * These should be deprecated in favor of always sending the protocolVersion.
+	 */
+    public PeerAddress(InetAddress addr) { 
         this(addr, MainNetParams.get().getPort());
     }
 
@@ -100,8 +102,23 @@ public class PeerAddress extends ChildMessage {
         this(addr.getAddress(), addr.getPort());
     }
 
+    /**
+     * Constructs a peer address from the given IP address and NetworkParameters. Port and protocol version are from the NetworkParameters.
+     */
+    public PeerAddress(InetAddress addr, NetworkParameters params) {
+        this(addr, params.getPort(), params.getProtocolVersion());
+    }
+
+    public PeerAddress(InetSocketAddress addr, NetworkParameters params) {
+        this(addr.getAddress(), addr.getPort(), params.getProtocolVersion());
+    }
+    
+    public PeerAddress(InetSocketAddress addr, int protocolVersion) {
+        this(addr.getAddress(), addr.getPort(), protocolVersion);
+    }
+
     public static PeerAddress localhost(NetworkParameters params) {
-        return new PeerAddress(InetAddresses.forString("127.0.0.1"), params.getPort());
+        return new PeerAddress(InetAddresses.forString("127.0.0.1"), params.getPort(), params.getProtocolVersion());
     }
 
     @Override
@@ -199,7 +216,6 @@ public class PeerAddress extends ChildMessage {
         unCache();
         this.port = port;
     }
-
 
     /**
      * @return the services
