@@ -163,7 +163,7 @@ public class FullPrunedBlockChain extends AbstractBlockChain {
         LinkedList<StoredTransactionOutput> txOutsCreated = new LinkedList<StoredTransactionOutput>();  
         long sigOps = 0;
         final Set<VerifyFlag> verifyFlags = EnumSet.noneOf(VerifyFlag.class);
-        if (block.getTimeSeconds() >= NetworkParameters.BIP16_ENFORCE_TIME)
+        if (block.getTimeSeconds() >= params.getBip16EnforceTime())
             verifyFlags.add(VerifyFlag.P2SH);
 
         if (scriptVerificationExecutor.isShutdown())
@@ -303,7 +303,7 @@ public class FullPrunedBlockChain extends AbstractBlockChain {
                 LinkedList<StoredTransactionOutput> txOutsCreated = new LinkedList<StoredTransactionOutput>();
                 long sigOps = 0;
                 final Set<VerifyFlag> verifyFlags = EnumSet.noneOf(VerifyFlag.class);
-                if (newBlock.getHeader().getTimeSeconds() >= NetworkParameters.BIP16_ENFORCE_TIME)
+                if (newBlock.getHeader().getTimeSeconds() >= params.getBip16EnforceTime())
                     verifyFlags.add(VerifyFlag.P2SH);
                 if (!params.isCheckpoint(newBlock.getHeight())) {
                     for(Transaction tx : transactions) {
