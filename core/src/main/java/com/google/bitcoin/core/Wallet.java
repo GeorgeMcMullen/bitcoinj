@@ -2990,7 +2990,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
          * attacks expensive.</p>
          *
          * <p>This is a constant fee (in satoshis) which will be added to the transaction. It is recommended that it be
-         * at least {@link Transaction#REFERENCE_DEFAULT_MIN_TX_FEE} if it is set, as default reference clients will
+         * at least {@link NetworkParameters#REFERENCE_DEFAULT_MIN_TX_FEE} if it is set, as default reference clients will
          * otherwise simply treat the transaction as if there were no fee at all.</p>
          *
          * <p>You might also consider adding a {@link SendRequest#feePerKb} to set the fee per kb of transaction size
@@ -3018,7 +3018,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
          * If you want to modify the default fee for your entire app without having to change each SendRequest you make,
          * you can do it here. This is primarily useful for unit tests.
          */
-        public static Coin DEFAULT_FEE_PER_KB = Transaction.REFERENCE_DEFAULT_MIN_TX_FEE;
+        public static Coin DEFAULT_FEE_PER_KB = NetworkParameters.REFERENCE_DEFAULT_MIN_TX_FEE;
 
         /**
          * <p>Requires that there be enough fee for a default reference client to at least relay the transaction.
@@ -3027,7 +3027,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
          *
          * <p>Note that this does not enforce certain fee rules that only apply to transactions which are larger than
          * 26,000 bytes. If you get a transaction which is that large, you should set a fee and feePerKb of at least
-         * {@link Transaction#REFERENCE_DEFAULT_MIN_TX_FEE}.</p>
+         * {@link NetworkParameters#REFERENCE_DEFAULT_MIN_TX_FEE}.</p>
          */
         public boolean ensureMinRequiredFee = true;
 
@@ -3083,7 +3083,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
         /**
          * <p>Creates a new SendRequest to the given address for the given value.</p>
          *
-         * <p>Be very careful when value is smaller than {@link Transaction#MIN_NONDUST_OUTPUT} as the transaction will
+         * <p>Be very careful when value is smaller than {@link NetworkParameters#MIN_NONDUST_OUTPUT} as the transaction will
          * likely be rejected by the network in this case.</p>
          */
         public static SendRequest to(Address destination, Coin value) {
@@ -3170,7 +3170,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
      * prevent this, but that should only occur once the transaction has been accepted by the network. This implies
      * you cannot have more than one outstanding sending tx at once.</p>
      *
-     * <p>You MUST ensure that the value is not smaller than {@link Transaction#MIN_NONDUST_OUTPUT} or the transaction
+     * <p>You MUST ensure that the value is not smaller than {@link NetworkParameters#MIN_NONDUST_OUTPUT} or the transaction
      * will almost certainly be rejected by the network as dust.</p>
      *
      * @param address The Bitcoin address to send the money to.
@@ -3227,7 +3227,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
      * successfully broadcast. This means that even if the network hasn't heard about your transaction you won't be
      * able to spend those same coins again.</p>
      *
-     * <p>You MUST ensure that value is not smaller than {@link Transaction#MIN_NONDUST_OUTPUT} or the transaction will
+     * <p>You MUST ensure that value is not smaller than {@link NetworkParameters#MIN_NONDUST_OUTPUT} or the transaction will
      * almost certainly be rejected by the network as dust.</p>
      *
      * @param broadcaster a {@link TransactionBroadcaster} to use to send the transactions out.
@@ -3522,8 +3522,8 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
         Coin fee = baseFee.add(feePerKb.multiply((size / 1000) + 1));
         output.setValue(output.getValue().subtract(fee));
         // Check if we need additional fee due to the output's value
-        if (output.getValue().compareTo(Coin.CENT) < 0 && fee.compareTo(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE) < 0)
-            output.setValue(output.getValue().subtract(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.subtract(fee)));
+        if (output.getValue().compareTo(Coin.CENT) < 0 && fee.compareTo(params.getReferenceDefaultMinTxFee()) < 0)
+            output.setValue(output.getValue().subtract(params.getReferenceDefaultMinTxFee().subtract(fee)));
         return output.getMinNonDustValue().compareTo(output.getValue()) <= 0;
     }
 
@@ -4003,8 +4003,8 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
             } else {
                 fees = fees.add(req.feePerKb);  // First time around the loop.
             }
-            if (needAtLeastReferenceFee && fees.compareTo(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE) < 0)
-                fees = Transaction.REFERENCE_DEFAULT_MIN_TX_FEE;
+            if (needAtLeastReferenceFee && fees.compareTo(params.getReferenceDefaultMinTxFee()) < 0)
+                fees = params.getReferenceDefaultMinTxFee();
 
             valueNeeded = value.add(fees);
             if (additionalValueForNextCategory != null)
@@ -4037,12 +4037,12 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
 
             // If change is < 0.01 BTC, we will need to have at least minfee to be accepted by the network
             if (req.ensureMinRequiredFee && !change.equals(Coin.ZERO) &&
-                    change.compareTo(Coin.CENT) < 0 && fees.compareTo(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE) < 0) {
+                    change.compareTo(Coin.CENT) < 0 && fees.compareTo(params.getReferenceDefaultMinTxFee()) < 0) {
                 // This solution may fit into category 2, but it may also be category 3, we'll check that later
                 eitherCategory2Or3 = true;
                 additionalValueForNextCategory = Coin.CENT;
                 // If the change is smaller than the fee we want to add, this will be negative
-                change = change.subtract(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.subtract(fees));
+                change = change.subtract(params.getReferenceDefaultMinTxFee().subtract(fees));
             }
 
             int size = 0;
@@ -4056,11 +4056,11 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
                     changeAddress = getChangeAddress();
                 changeOutput = new TransactionOutput(params, req.tx, change, changeAddress);
                 // If the change output would result in this transaction being rejected as dust, just drop the change and make it a fee
-                if (req.ensureMinRequiredFee && Transaction.MIN_NONDUST_OUTPUT.compareTo(change) >= 0) {
+                if (req.ensureMinRequiredFee && params.getMinNonDustOutput().compareTo(change) >= 0) {
                     // This solution definitely fits in category 3
                     isCategory3 = true;
-                    additionalValueForNextCategory = Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.add(
-                                                     Transaction.MIN_NONDUST_OUTPUT.add(Coin.SATOSHI));
+                    additionalValueForNextCategory = params.getReferenceDefaultMinTxFee().add(
+                    		params.getMinNonDustOutput().add(Coin.SATOSHI));
                 } else {
                     size += changeOutput.bitcoinSerialize().length + VarInt.sizeOf(req.tx.getOutputs().size()) - VarInt.sizeOf(req.tx.getOutputs().size() - 1);
                     // This solution is either category 1 or 2
@@ -4071,7 +4071,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
                 if (eitherCategory2Or3) {
                     // This solution definitely fits in category 3 (we threw away change because it was smaller than MIN_TX_FEE)
                     isCategory3 = true;
-                    additionalValueForNextCategory = Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.add(Coin.SATOSHI);
+                    additionalValueForNextCategory = params.getReferenceDefaultMinTxFee().add(Coin.SATOSHI);
                 }
             }
 
@@ -4397,7 +4397,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
                 rekeyTx.addInput(output);
             }
             rekeyTx.addOutput(toMove.valueGathered, freshReceiveAddress());
-            if (!adjustOutputDownwardsForFee(rekeyTx, toMove, Coin.ZERO, Transaction.REFERENCE_DEFAULT_MIN_TX_FEE)) {
+            if (!adjustOutputDownwardsForFee(rekeyTx, toMove, Coin.ZERO, params.getReferenceDefaultMinTxFee())) {
                 log.error("Failed to adjust rekey tx for fees.");
                 return null;
             }

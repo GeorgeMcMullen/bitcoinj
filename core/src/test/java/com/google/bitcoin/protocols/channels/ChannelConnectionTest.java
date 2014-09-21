@@ -154,7 +154,7 @@ public class ChannelConnectionTest extends TestWithWallet {
         // Wait for the channel to finish opening.
         client.getChannelOpenFuture().get();
         assertEquals(broadcastMultiSig.getHash(), channelOpenFuture.get());
-        assertEquals(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE, client.state().getValueSpent());
+        assertEquals(params.getReferenceDefaultMinTxFee(), client.state().getValueSpent());
 
         // Set up an autosave listener to make sure the server is saving the wallet after each payment increase.
         final CountDownLatch latch = new CountDownLatch(3);  // Expect 3 calls.
@@ -289,7 +289,7 @@ public class ChannelConnectionTest extends TestWithWallet {
         broadcastTxPause.release();
         server.receiveMessage(pair.clientRecorder.checkNextMsg(MessageType.PROVIDE_CONTRACT));
         broadcasts.take();
-        pair.serverRecorder.checkTotalPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
+        pair.serverRecorder.checkTotalPayment(params.getReferenceDefaultMinTxFee());
         client.receiveMessage(pair.serverRecorder.checkNextMsg(MessageType.CHANNEL_OPEN));
         Sha256Hash contractHash = (Sha256Hash) pair.serverRecorder.q.take();
         pair.clientRecorder.checkInitiated();
@@ -482,7 +482,7 @@ public class ChannelConnectionTest extends TestWithWallet {
                 .setInitiate(Protos.Initiate.newBuilder().setExpireTimeSecs(Utils.currentTimeSeconds() + 60 * 60 * 48)
                         .setMinAcceptedChannelSize(100)
                         .setMultisigKey(ByteString.copyFrom(new ECKey().getPubKey()))
-                        .setMinPayment(Transaction.MIN_NONDUST_OUTPUT.value))
+                        .setMinPayment(params.getMinNonDustOutput().value))
                 .setType(MessageType.INITIATE).build());
 
         pair.clientRecorder.checkNextMsg(MessageType.ERROR);
@@ -507,7 +507,7 @@ public class ChannelConnectionTest extends TestWithWallet {
                 .setInitiate(Protos.Initiate.newBuilder().setExpireTimeSecs(Utils.currentTimeSeconds())
                         .setMinAcceptedChannelSize(COIN.add(SATOSHI).value)
                         .setMultisigKey(ByteString.copyFrom(new ECKey().getPubKey()))
-                        .setMinPayment(Transaction.MIN_NONDUST_OUTPUT.value))
+                        .setMinPayment(params.getMinNonDustOutput().value))
                 .setType(MessageType.INITIATE).build());
         pair.clientRecorder.checkNextMsg(MessageType.ERROR);
         assertEquals(CloseReason.SERVER_REQUESTED_TOO_MUCH_VALUE, pair.clientRecorder.q.take());
@@ -533,7 +533,7 @@ public class ChannelConnectionTest extends TestWithWallet {
                 .setInitiate(Protos.Initiate.newBuilder().setExpireTimeSecs(Utils.currentTimeSeconds())
                         .setMinAcceptedChannelSize(COIN.add(SATOSHI).value)
                         .setMultisigKey(ByteString.copyFrom(new ECKey().getPubKey()))
-                        .setMinPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.value))
+                        .setMinPayment(params.getReferenceDefaultMinTxFee().value))
                 .setType(MessageType.INITIATE).build());
         final Protos.TwoWayChannelMessage provideRefund = pair.clientRecorder.checkNextMsg(MessageType.PROVIDE_REFUND);
         Transaction refund = new Transaction(params, provideRefund.getProvideRefund().getTx().toByteArray());
@@ -556,7 +556,7 @@ public class ChannelConnectionTest extends TestWithWallet {
                     .setInitiate(Protos.Initiate.newBuilder().setExpireTimeSecs(Utils.currentTimeSeconds())
                             .setMinAcceptedChannelSize(CENT.value)
                             .setMultisigKey(ByteString.copyFrom(new ECKey().getPubKey()))
-                            .setMinPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.value))
+                            .setMinPayment(params.getReferenceDefaultMinTxFee().value))
                     .setType(MessageType.INITIATE).build());
             fail();
         } catch (InsufficientMoneyException expected) {
@@ -632,7 +632,7 @@ public class ChannelConnectionTest extends TestWithWallet {
         broadcastTxPause.release();
         server.receiveMessage(pair.clientRecorder.checkNextMsg(MessageType.PROVIDE_CONTRACT));
         broadcasts.take();
-        pair.serverRecorder.checkTotalPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
+        pair.serverRecorder.checkTotalPayment(params.getReferenceDefaultMinTxFee());
         client.receiveMessage(pair.serverRecorder.checkNextMsg(MessageType.CHANNEL_OPEN));
         Sha256Hash contractHash = (Sha256Hash) pair.serverRecorder.q.take();
         pair.clientRecorder.checkInitiated();
@@ -678,7 +678,7 @@ public class ChannelConnectionTest extends TestWithWallet {
             broadcastTxPause.release();
             server.receiveMessage(pair.clientRecorder.checkNextMsg(MessageType.PROVIDE_CONTRACT));
             broadcasts.take();
-            pair.serverRecorder.checkTotalPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
+            pair.serverRecorder.checkTotalPayment(params.getReferenceDefaultMinTxFee());
             client.receiveMessage(pair.serverRecorder.checkNextMsg(MessageType.CHANNEL_OPEN));
             Sha256Hash contractHash = (Sha256Hash) pair.serverRecorder.q.take();
             pair.clientRecorder.checkInitiated();
@@ -732,7 +732,7 @@ public class ChannelConnectionTest extends TestWithWallet {
             broadcastTxPause.release();
             server.receiveMessage(pair.clientRecorder.checkNextMsg(MessageType.PROVIDE_CONTRACT));
             broadcasts.take();
-            pair.serverRecorder.checkTotalPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
+            pair.serverRecorder.checkTotalPayment(params.getReferenceDefaultMinTxFee());
             client.receiveMessage(pair.serverRecorder.checkNextMsg(MessageType.CHANNEL_OPEN));
             Sha256Hash contractHash = (Sha256Hash) pair.serverRecorder.q.take();
             pair.clientRecorder.checkInitiated();

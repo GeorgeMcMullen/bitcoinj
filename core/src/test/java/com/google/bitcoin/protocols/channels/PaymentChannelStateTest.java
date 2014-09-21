@@ -240,7 +240,7 @@ public class PaymentChannelStateTest extends TestWithWallet {
         assertEquals(CENT.divide(2), clientState.getTotalValue());
         clientState.initiate();
         // We will have to pay min_tx_fee twice - both the multisig contract and the refund tx
-        assertEquals(clientState.getRefundTxFees(), Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(2));
+        assertEquals(clientState.getRefundTxFees(), params.getReferenceDefaultMinTxFee().multiply(2));
         assertEquals(PaymentChannelClientState.State.INITIATED, clientState.getState());
 
         // Send the refund tx from client to server and get back the signature.
@@ -315,7 +315,7 @@ public class PaymentChannelStateTest extends TestWithWallet {
         chain.add(makeSolvedTestBlock(blockStore.getChainHead().getHeader(), multisigContract,clientBroadcastedRefund));
 
         // Make sure we actually had to pay what initialize() told us we would
-        assertEquals(wallet.getBalance(), CENT.subtract(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(2)));
+        assertEquals(wallet.getBalance(), CENT.subtract(params.getReferenceDefaultMinTxFee().multiply(2)));
 
         try {
             // After its expired, we cant still increment payment
@@ -548,7 +548,7 @@ public class PaymentChannelStateTest extends TestWithWallet {
         } catch (ValueOutOfRangeException e) {}
 
         clientState = new PaymentChannelClientState(wallet, myKey, ECKey.fromPublicOnly(serverKey.getPubKey()),
-                                                    Transaction.MIN_NONDUST_OUTPUT.subtract(Coin.SATOSHI).add(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE),
+        		params.getMinNonDustOutput().subtract(Coin.SATOSHI).add(params.getReferenceDefaultMinTxFee()),
                 EXPIRE_TIME);
         assertEquals(PaymentChannelClientState.State.NEW, clientState.getState());
         try {
@@ -558,11 +558,11 @@ public class PaymentChannelStateTest extends TestWithWallet {
 
         // Verify that MIN_NONDUST_OUTPUT + MIN_TX_FEE is accepted
         clientState = new PaymentChannelClientState(wallet, myKey, ECKey.fromPublicOnly(serverKey.getPubKey()),
-                Transaction.MIN_NONDUST_OUTPUT.add(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE), EXPIRE_TIME);
+        		params.getMinNonDustOutput().add(params.getReferenceDefaultMinTxFee()), EXPIRE_TIME);
         assertEquals(PaymentChannelClientState.State.NEW, clientState.getState());
         // We'll have to pay REFERENCE_DEFAULT_MIN_TX_FEE twice (multisig+refund), and we'll end up getting back nearly nothing...
         clientState.initiate();
-        assertEquals(clientState.getRefundTxFees(), Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(2));
+        assertEquals(clientState.getRefundTxFees(), params.getReferenceDefaultMinTxFee().multiply(2));
         assertEquals(PaymentChannelClientState.State.INITIATED, clientState.getState());
 
         // Now actually use a more useful CENT
@@ -610,13 +610,13 @@ public class PaymentChannelStateTest extends TestWithWallet {
         // We cannot send just under the total value - our refund would make it unspendable. So the client
         // will correct it for us to be larger than the requested amount, to make the change output zero.
         PaymentChannelClientState.IncrementedPayment payment =
-                clientState.incrementPaymentBy(CENT.subtract(Transaction.MIN_NONDUST_OUTPUT));
+                clientState.incrementPaymentBy(CENT.subtract(params.getMinNonDustOutput()));
         assertEquals(CENT.subtract(SATOSHI), payment.amount);
         totalPayment = totalPayment.add(payment.amount);
 
         // The server also won't accept it if we do that.
         try {
-            serverState.incrementPayment(Transaction.MIN_NONDUST_OUTPUT.subtract(Coin.SATOSHI), signature);
+            serverState.incrementPayment(params.getMinNonDustOutput().subtract(Coin.SATOSHI), signature);
             fail();
         } catch (ValueOutOfRangeException e) {}
 
@@ -680,9 +680,9 @@ public class PaymentChannelStateTest extends TestWithWallet {
         assertEquals(PaymentChannelServerState.State.READY, serverState.getState());
 
         // Both client and server are now in the ready state, split the channel in half
-        byte[] signature = clientState.incrementPaymentBy(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.subtract(Coin.SATOSHI))
+        byte[] signature = clientState.incrementPaymentBy(params.getReferenceDefaultMinTxFee().subtract(Coin.SATOSHI))
                 .signature.encodeToBitcoin();
-        Coin totalRefund = CENT.subtract(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.subtract(SATOSHI));
+        Coin totalRefund = CENT.subtract(params.getReferenceDefaultMinTxFee().subtract(SATOSHI));
         serverState.incrementPayment(totalRefund, signature);
 
         // We need to pay MIN_TX_FEE, but we only have MIN_NONDUST_OUTPUT

@@ -147,6 +147,21 @@ public abstract class NetworkParameters implements Serializable {
      */
     public static final Coin MAX_MONEY = COIN.multiply(MAX_COINS);
 
+    /**
+     * If fee is lower than this value (in satoshis), a default reference client will treat it as if there were no fee.
+     * Currently this is 10000 satoshis.
+     */
+    public static final Coin REFERENCE_DEFAULT_MIN_TX_FEE = Coin.valueOf(10000);
+    private Coin referenceDefaultMinTxFee = REFERENCE_DEFAULT_MIN_TX_FEE;
+    
+    /**
+     * Any standard (ie pay-to-address) output smaller than this value (in satoshis) will most likely be rejected by the network.
+     * This is calculated by assuming a standard output will be 34 bytes, and then using the formula used in
+     * {@link TransactionOutput#getMinNonDustValue(Coin)}. Currently it's 5460 satoshis.
+     */
+    public static final Coin MIN_NONDUST_OUTPUT = Coin.valueOf(5460);
+    private Coin minNonDustOutput = MIN_NONDUST_OUTPUT;
+
     /** Alias for TestNet3Params.get(), use that instead. */
     @Deprecated
     public static NetworkParameters testNet() {
@@ -312,7 +327,21 @@ public abstract class NetworkParameters implements Serializable {
     public int getDumpedPrivateKeyHeader() {
         return dumpedPrivateKeyHeader;
     }
+    
+    /**
+     * The minimum fee for a transaction. Currently this is 10000 satoshis.
+     */
+    public Coin getReferenceDefaultMinTxFee() {
+    	return referenceDefaultMinTxFee;
+    }
 
+    /**
+     * The minimum amount a transaction should be or it will be rejected by the network.
+     */
+    public Coin getMinNonDustOutput() {
+    	return minNonDustOutput;
+    }
+    
     /**
      * How much time in seconds is supposed to pass between "interval" blocks. If the actual elapsed time is
      * significantly different from this value, the network difficulty formula will produce a different value. Both

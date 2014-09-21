@@ -265,11 +265,11 @@ public class PaymentChannelClientState {
         refundTx.setLockTime(expiryTime);
         if (totalValue.compareTo(Coin.CENT) < 0) {
             // Must pay min fee.
-            final Coin valueAfterFee = totalValue.subtract(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
-            if (Transaction.MIN_NONDUST_OUTPUT.compareTo(valueAfterFee) > 0)
+            final Coin valueAfterFee = totalValue.subtract(params.getReferenceDefaultMinTxFee());
+            if (params.getMinNonDustOutput().compareTo(valueAfterFee) > 0)
                 throw new ValueOutOfRangeException("totalValue too small to use");
             refundTx.addOutput(valueAfterFee, myKey.toAddress(params));
-            refundFees = multisigFee.add(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
+            refundFees = multisigFee.add(params.getReferenceDefaultMinTxFee());
         } else {
             refundTx.addOutput(totalValue, myKey.toAddress(params));
             refundFees = multisigFee;
@@ -397,7 +397,7 @@ public class PaymentChannelClientState {
         if (size.signum() < 0)
             throw new ValueOutOfRangeException("Tried to decrement payment");
         Coin newValueToMe = valueToMe.subtract(size);
-        if (newValueToMe.compareTo(Transaction.MIN_NONDUST_OUTPUT) < 0 && newValueToMe.signum() > 0) {
+        if (newValueToMe.compareTo(wallet.getParams().getMinNonDustOutput()) < 0 && newValueToMe.signum() > 0) {
             log.info("New value being sent back as change was smaller than minimum nondust output, sending all");
             size = valueToMe;
             newValueToMe = Coin.ZERO;

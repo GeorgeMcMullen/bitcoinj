@@ -4,7 +4,9 @@ import com.google.bitcoin.core.Coin;
 import com.google.bitcoin.core.TransactionBroadcaster;
 import com.google.bitcoin.core.Utils;
 import com.google.bitcoin.core.Wallet;
+import com.google.bitcoin.params.UnitTestParams;
 import org.bitcoin.paymentchannel.Protos;
+import org.easymock.EasyMock;
 import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +31,11 @@ public class PaymentChannelServerTest {
     public void setUp() {
         broadcaster = createMock(TransactionBroadcaster.class);
         wallet = createMock(Wallet.class);
+        // We need to define the required mocked wallet's methods or the test will fail. Another option would just use a real Wallet.  
+        EasyMock.expect(wallet.getParams()).andReturn(UnitTestParams.get()).anyTimes();
+        EasyMock.expect(wallet.freshReceiveKey()).andReturn(null).anyTimes();
+        replay(wallet);
+
         connection = createMock(PaymentChannelServer.ServerConnection.class);
         serverVersionCapture = new Capture<TwoWayChannelMessage>();
         connection.sendToClient(capture(serverVersionCapture));

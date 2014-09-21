@@ -127,7 +127,7 @@ public class TestWithNetworkConnections {
     }
 
     public void tearDown() throws Exception {
-        Wallet.SendRequest.DEFAULT_FEE_PER_KB = Transaction.REFERENCE_DEFAULT_MIN_TX_FEE;
+        Wallet.SendRequest.DEFAULT_FEE_PER_KB = unitTestParams.getReferenceDefaultMinTxFee();
         stopPeerServers();
     }
 
