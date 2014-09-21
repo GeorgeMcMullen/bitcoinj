@@ -238,7 +238,7 @@ public class TransactionOutput extends ChildMessage implements Serializable {
      * a safe fee-per-kb by default.</p>
      *
      * @param feePerKbRequired The fee required per kilobyte. Note that this is the same as the reference client's -minrelaytxfee * 3
-     *                         If you want a safe default, use {@link Transaction#REFERENCE_DEFAULT_MIN_TX_FEE}*3
+     *                         If you want a safe default, use {@link NetworkParameters#REFERENCE_DEFAULT_MIN_TX_FEE}*3
      */
     public Coin getMinNonDustValue(Coin feePerKbRequired) {
         // A typical output is 33 bytes (pubkey hash + opcodes) and requires an input of 148 bytes to spend so we add
@@ -254,10 +254,10 @@ public class TransactionOutput extends ChildMessage implements Serializable {
     /**
      * Returns the minimum value for this output to be considered "not dust", i.e. the transaction will be relayable
      * and mined by default miners. For normal pay to address outputs, this is 5460 satoshis, the same as
-     * {@link Transaction#MIN_NONDUST_OUTPUT}.
+     * {@link NetworkParameters#MIN_NONDUST_OUTPUT}.
      */
     public Coin getMinNonDustValue() {
-        return getMinNonDustValue(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(3));
+        return getMinNonDustValue(params.getReferenceDefaultMinTxFee().multiply(3));
     }
 
     /**

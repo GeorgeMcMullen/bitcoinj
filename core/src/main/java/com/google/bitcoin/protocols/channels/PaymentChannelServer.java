@@ -267,7 +267,7 @@ public class PaymentChannelServer {
                 .setMultisigKey(ByteString.copyFrom(myKey.getPubKey()))
                 .setExpireTimeSecs(expireTime)
                 .setMinAcceptedChannelSize(minAcceptedChannelSize.value)
-                .setMinPayment(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.value);
+                .setMinPayment(wallet.getParams().getReferenceDefaultMinTxFee().value);
 
         conn.sendToClient(Protos.TwoWayChannelMessage.newBuilder()
                 .setInitiate(initiateBuilder)

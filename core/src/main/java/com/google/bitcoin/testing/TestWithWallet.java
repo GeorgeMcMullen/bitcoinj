@@ -36,7 +36,7 @@ import static com.google.bitcoin.testing.FakeTxBuilder.createFakeTx;
  * with money in whatever ways you wish. Note that for simplicity with amounts, this class sets the default
  * fee per kilobyte to zero in setUp and back to normal in tearDown. If you are wanting to test your behaviour
  * with fees (a good idea!) make sure you set the {@link Wallet.SendRequest#DEFAULT_FEE_PER_KB} value to
- * {@link Transaction#REFERENCE_DEFAULT_MIN_TX_FEE} before doing so.
+ * {@link NetworkParameters#REFERENCE_DEFAULT_MIN_TX_FEE} before doing so.
  */
 public class TestWithWallet {
     protected static final NetworkParameters params = UnitTestParams.get();
@@ -57,7 +57,7 @@ public class TestWithWallet {
     }
 
     public void tearDown() throws Exception {
-        Wallet.SendRequest.DEFAULT_FEE_PER_KB = Transaction.REFERENCE_DEFAULT_MIN_TX_FEE;
+        Wallet.SendRequest.DEFAULT_FEE_PER_KB = params.getReferenceDefaultMinTxFee();
     }
 
     @Nullable
