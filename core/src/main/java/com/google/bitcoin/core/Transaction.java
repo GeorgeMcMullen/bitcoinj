@@ -1193,8 +1193,8 @@ public class Transaction extends ChildMessage implements Serializable {
                 if (output.getValue().signum() < 0)    // getValue() can throw IllegalStateException
                     throw new VerificationException.NegativeValueOutput();
                 valueOut = valueOut.add(output.getValue());
-                // Duplicate the MAX_MONEY check from Coin.add() in case someone accidentally removes it.
-                if (valueOut.compareTo(NetworkParameters.MAX_MONEY) > 0)
+                // Duplicate the params.getMaxMoney() check from Coin.add() in case someone accidentally removes it.
+                if (valueOut.compareTo(params.getMaxMoney()) > 0)
                     throw new IllegalArgumentException();
             }
         } catch (IllegalStateException e) {

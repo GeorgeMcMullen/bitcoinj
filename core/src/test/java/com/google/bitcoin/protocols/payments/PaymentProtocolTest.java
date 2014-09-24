@@ -126,7 +126,7 @@ public class PaymentProtocolTest {
         Coin refundAmount = Coin.SATOSHI;
         Address refundAddress = new ECKey().toAddress(NETWORK_PARAMS);
         Payment payment = PaymentProtocol.createPaymentMessage(transactions, refundAmount, refundAddress, MEMO,
-                MERCHANT_DATA);
+                MERCHANT_DATA, NETWORK_PARAMS);
         byte[] paymentBytes = payment.toByteArray();
 
         // Parse

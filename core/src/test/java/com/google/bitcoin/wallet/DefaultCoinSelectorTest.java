@@ -76,7 +76,7 @@ public class DefaultCoinSelectorTest extends TestWithWallet {
         Transaction t2 = checkNotNull(sendMoneyToWallet(COIN, AbstractBlockChain.NewBlockType.BEST_CHAIN));
 
         // Check we selected just the oldest one.
-        DefaultCoinSelector selector = new DefaultCoinSelector();
+        DefaultCoinSelector selector = new DefaultCoinSelector(params);
         CoinSelection selection = selector.select(COIN, wallet.calculateAllSpendCandidates(true));
         assertTrue(selection.gathered.contains(t1.getOutputs().get(0)));
         assertEquals(COIN, selection.valueGathered);

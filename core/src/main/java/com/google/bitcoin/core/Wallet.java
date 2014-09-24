@@ -190,7 +190,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
     private volatile long vKeyRotationTimestamp;
     private volatile boolean vKeyRotationEnabled;
 
-    protected transient CoinSelector coinSelector = new DefaultCoinSelector();
+    protected transient CoinSelector coinSelector;
 
     // The wallet version. This is an int that can be used to track breaking changes in the wallet format.
     // You can also use it to detect wallets that come from the future (ie they contain features you
@@ -241,6 +241,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
     public Wallet(NetworkParameters params, KeyChainGroup keyChainGroup) {
         this.params = checkNotNull(params);
         this.keychain = checkNotNull(keyChainGroup);
+        coinSelector = new DefaultCoinSelector(params);
         if (params == UnitTestParams.get())
             this.keychain.setLookaheadSize(5);  // Cut down excess computation for unit tests.
         // If this keychain was created fresh just now (new wallet), make HD so a backup can be made immediately
@@ -2811,7 +2812,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
         try {
             checkNotNull(selector);
             LinkedList<TransactionOutput> candidates = calculateAllSpendCandidates(true);
-            CoinSelection selection = selector.select(NetworkParameters.MAX_MONEY, candidates);
+            CoinSelection selection = selector.select(params.getMaxMoney(), candidates);
             return selection.valueGathered;
         } finally {
             lock.unlock();
@@ -2832,7 +2833,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
         try {
             checkNotNull(selector);
             List<TransactionOutput> candidates = getWatchedOutputs(true);
-            CoinSelection selection = selector.select(NetworkParameters.MAX_MONEY, candidates);
+            CoinSelection selection = selector.select(params.getMaxMoney(), candidates);
             return selection.valueGathered;
         } finally {
             lock.unlock();
@@ -3398,7 +3399,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
                 // of the total value we can currently spend as determined by the selector, and then subtracting the fee.
                 checkState(req.tx.getOutputs().size() == 1, "Empty wallet TX must have a single output only.");
                 CoinSelector selector = req.coinSelector == null ? coinSelector : req.coinSelector;
-                bestCoinSelection = selector.select(NetworkParameters.MAX_MONEY, candidates);
+                bestCoinSelection = selector.select(params.getMaxMoney(), candidates);
                 candidates = null;  // Selector took ownership and might have changed candidates. Don't access again.
                 req.tx.getOutput(0).setValue(bestCoinSelection.valueGathered);
                 log.info("  emptying {}", bestCoinSelection.valueGathered.toFriendlyString());
@@ -3582,7 +3583,7 @@ public class Wallet extends BaseTaggableObject implements Serializable, BlockCha
      * be dangerous - only use this if you absolutely know what you're doing!
      */
     public void allowSpendingUnconfirmedTransactions() {
-        setCoinSelector(AllowUnconfirmedCoinSelector.get());
+        setCoinSelector(AllowUnconfirmedCoinSelector.get(params));
     }
 
     //endregion
