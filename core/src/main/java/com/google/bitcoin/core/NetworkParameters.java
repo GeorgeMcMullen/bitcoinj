@@ -135,6 +135,7 @@ public abstract class NetworkParameters implements Serializable {
      * mined upon and thus will be quickly re-orged out as long as the majority are enforcing the rule.
      */
     public static final int BIP16_ENFORCE_TIME = 1333238400;
+    private int bip16EnforceTime = BIP16_ENFORCE_TIME;
     
     /**
      * The maximum number of coins to be generated
@@ -402,6 +403,11 @@ public abstract class NetworkParameters implements Serializable {
         return maxTarget;
     }
 
+    /** When to enforce BIP 16, aka "Pay to script hash". */
+    public int getBip16EnforceTime() {
+    	return bip16EnforceTime;
+    }
+    
     /**
      * The key used to sign {@link com.google.bitcoin.core.AlertMessage}s. You can use {@link com.google.bitcoin.core.ECKey#verify(byte[], byte[], byte[])} to verify
      * signatures using it.
