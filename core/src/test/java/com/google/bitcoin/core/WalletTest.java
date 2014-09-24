@@ -19,6 +19,7 @@ package com.google.bitcoin.core;
 
 import com.google.bitcoin.core.Wallet.SendRequest;
 import com.google.bitcoin.crypto.*;
+import com.google.bitcoin.params.MainNetParams;
 import com.google.bitcoin.signers.StatelessTransactionSigner;
 import com.google.bitcoin.signers.TransactionSigner;
 import com.google.bitcoin.store.BlockStoreException;
@@ -34,6 +35,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.protobuf.ByteString;
+
 import org.bitcoinj.wallet.Protos;
 import org.bitcoinj.wallet.Protos.Wallet.EncryptionType;
 import org.junit.After;
@@ -195,7 +197,15 @@ public class WalletTest extends TestWithWallet {
     }
 
     static class TestCoinSelector extends DefaultCoinSelector {
-        @Override
+    	public TestCoinSelector() {
+    		this(MainNetParams.get());
+        }
+
+    	public TestCoinSelector(NetworkParameters params) {
+    		super(params);
+        }
+
+    	@Override
         protected boolean shouldSelect(Transaction tx) {
             return true;
         }
@@ -255,7 +265,7 @@ public class WalletTest extends TestWithWallet {
         SendRequest req = SendRequest.to(destination, v3);
 
         // Force selection of the incoming coin so that we can spend it
-        req.coinSelector = new TestCoinSelector();
+        req.coinSelector = new TestCoinSelector(params);
 
         req.fee = CENT;
         wallet.completeTx(req);

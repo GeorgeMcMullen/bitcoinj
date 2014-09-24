@@ -141,11 +141,13 @@ public abstract class NetworkParameters implements Serializable {
      * The maximum number of coins to be generated
      */
     public static final long MAX_COINS = 21000000;
-
+    protected long maxCoins = MAX_COINS;
+    
     /**
      * The maximum money to be generated
      */
     public static final Coin MAX_MONEY = COIN.multiply(MAX_COINS);
+    protected Coin maxMoney = MAX_MONEY;
 
     /**
      * If fee is lower than this value (in satoshis), a default reference client will treat it as if there were no fee.
@@ -328,6 +330,20 @@ public abstract class NetworkParameters implements Serializable {
         return dumpedPrivateKeyHeader;
     }
     
+    /**
+     * The total number of coins available to the network. Currently this is 21000000.
+     */
+    public long getMaxCoins() {
+    	return maxCoins;
+    }
+
+    /**
+     * The total available amount of money available on the network. Currently this is 21000000 coins * 10^8.
+     */
+    public Coin getMaxMoney() {
+    	return maxMoney;
+    }
+
     /**
      * The minimum fee for a transaction. Currently this is 10000 satoshis.
      */

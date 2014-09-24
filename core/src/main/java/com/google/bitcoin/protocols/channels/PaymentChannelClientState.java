@@ -248,7 +248,7 @@ public class PaymentChannelClientState {
         if (multisigOutput.getMinNonDustValue().compareTo(totalValue) > 0)
             throw new ValueOutOfRangeException("totalValue too small to use");
         Wallet.SendRequest req = Wallet.SendRequest.forTx(template);
-        req.coinSelector = AllowUnconfirmedCoinSelector.get();
+        req.coinSelector = AllowUnconfirmedCoinSelector.get(params);
         editContractSendRequest(req);
         req.shuffleOutputs = false;   // TODO: Fix things so shuffling is usable.
         wallet.completeTx(req);

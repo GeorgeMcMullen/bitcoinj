@@ -19,15 +19,18 @@ package com.google.bitcoin.protocols.payments;
 
 import com.google.bitcoin.core.*;
 import com.google.bitcoin.crypto.X509Utils;
+import com.google.bitcoin.params.MainNetParams;
 import com.google.bitcoin.script.ScriptBuilder;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+
 import org.bitcoin.protocols.payments.Protos;
 
 import javax.annotation.Nullable;
+
 import java.io.Serializable;
 import java.security.*;
 import java.security.cert.*;
@@ -67,7 +70,7 @@ public class PaymentProtocol {
     public static Protos.PaymentRequest.Builder createPaymentRequest(NetworkParameters params,
             @Nullable Coin amount, Address toAddress, @Nullable String memo, @Nullable String paymentUrl,
             @Nullable byte[] merchantData) {
-        return createPaymentRequest(params, ImmutableList.of(createPayToAddressOutput(amount, toAddress)), memo,
+        return createPaymentRequest(params, ImmutableList.of(createPayToAddressOutput(amount, toAddress, params)), memo,
                 paymentUrl, merchantData);
     }
 
@@ -287,16 +290,17 @@ public class PaymentProtocol {
      * @param refundAddress address to refund coins to
      * @param memo arbitrary, user readable memo, or null if none
      * @param merchantData arbitrary merchant data, or null if none
+     * @param params the network for the transaction
      * @return created payment message
      */
     public static Protos.Payment createPaymentMessage(List<Transaction> transactions,
             @Nullable Coin refundAmount, @Nullable Address refundAddress, @Nullable String memo,
-            @Nullable byte[] merchantData) {
+            @Nullable byte[] merchantData, NetworkParameters params) {
         if (refundAddress != null) {
             if (refundAmount == null)
                 throw new IllegalArgumentException("Specify refund amount if refund address is specified.");
             return createPaymentMessage(transactions,
-                    ImmutableList.of(createPayToAddressOutput(refundAmount, refundAddress)), memo, merchantData);
+                    ImmutableList.of(createPayToAddressOutput(refundAmount, refundAddress, params)), memo, merchantData);
         } else {
             return createPaymentMessage(transactions, null, memo, merchantData);
         }
@@ -395,10 +399,23 @@ public class PaymentProtocol {
      * @param address address to pay to
      * @return output
      */
-    public static Protos.Output createPayToAddressOutput(@Nullable Coin amount, Address address) {
+    public static Protos.Output createPayToAddressOutput(@Nullable Coin amount, Address address) { 	
+        return createPayToAddressOutput(amount, address, MainNetParams.get());
+    }
+
+    /**
+     * Create a standard pay to address output for usage in {@link #createPaymentRequest} and
+     * {@link #createPaymentMessage}.
+     * 
+     * @param amount amount to pay, or null
+     * @param address address to pay to
+     * @param params the network for the transaction
+     * @return output
+     */
+    public static Protos.Output createPayToAddressOutput(@Nullable Coin amount, Address address, NetworkParameters params) {
         Protos.Output.Builder output = Protos.Output.newBuilder();
         if (amount != null) {
-            if (amount.compareTo(NetworkParameters.MAX_MONEY) > 0)
+            if (amount.compareTo(params.getMaxMoney()) > 0)
                 throw new IllegalArgumentException("Amount too big: " + amount);
             output.setAmount(amount.value);
         } else {

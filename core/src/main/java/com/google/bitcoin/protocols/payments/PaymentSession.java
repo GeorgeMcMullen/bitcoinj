@@ -311,6 +311,7 @@ public class PaymentSession {
      * @param txns list of transactions to be included with the Payment message.
      * @param refundAddr will be used by the merchant to send money back if there was a problem.
      * @param memo is a message to include in the payment message sent to the merchant.
+     * @param params the network for the transaction
      */
     public @Nullable ListenableFuture<PaymentProtocol.Ack> sendPayment(List<Transaction> txns, @Nullable Address refundAddr, @Nullable String memo)
             throws PaymentProtocolException, VerificationException, IOException {
@@ -342,7 +343,7 @@ public class PaymentSession {
             for (Transaction tx : txns)
                 if (!tx.getParams().equals(params))
                     throw new PaymentProtocolException.InvalidNetwork(params.getPaymentProtocolId());
-            return PaymentProtocol.createPaymentMessage(txns, totalValue, refundAddr, memo, getMerchantData());
+            return PaymentProtocol.createPaymentMessage(txns, totalValue, refundAddr, memo, getMerchantData(), params);
         } else {
             return null;
         }
@@ -401,7 +402,7 @@ public class PaymentSession {
             }
             // This won't ever happen in practice. It would only happen if the user provided outputs
             // that are obviously invalid. Still, we don't want to silently overflow.
-            if (totalValue.compareTo(NetworkParameters.MAX_MONEY) > 0)
+            if (totalValue.compareTo(params.getMaxMoney()) > 0)
                 throw new PaymentProtocolException.InvalidOutputs("The outputs are way too big.");
         } catch (InvalidProtocolBufferException e) {
             throw new PaymentProtocolException(e);
