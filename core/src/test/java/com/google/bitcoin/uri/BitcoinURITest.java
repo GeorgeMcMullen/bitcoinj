@@ -378,12 +378,6 @@ public class BitcoinURITest {
                 + "?amount=-1");
     }
 
-    @Test(expected = BitcoinURIParseException.class)
-    public void testBad_TooLargeAmount() throws BitcoinURIParseException {
-        new BitcoinURI(MainNetParams.get(), BitcoinURI.BITCOIN_SCHEME + ":" + MAINNET_GOOD_ADDRESS
-                + "?amount=100000000");
-    }
-
     @Test
     public void testPaymentProtocolReq() throws Exception {
         // Non-backwards compatible form ...

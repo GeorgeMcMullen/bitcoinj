@@ -17,7 +17,7 @@
 package com.google.bitcoin.core;
 
 import static com.google.bitcoin.core.Coin.*;
-import static com.google.bitcoin.core.NetworkParameters.MAX_MONEY;
+import com.google.bitcoin.params.UnitTestParams;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -29,6 +29,8 @@ import org.junit.Test;
 
 public class CoinTest {
 
+	NetworkParameters params = UnitTestParams.get();
+		
     @Test
     public void testParseCoin() {
         // String version
@@ -49,18 +51,8 @@ public class CoinTest {
         assertEquals(CENT, valueOf(0, 1));
         assertEquals(SATOSHI, valueOf(1));
         assertEquals(NEGATIVE_SATOSHI, valueOf(-1));
-        assertEquals(MAX_MONEY, valueOf(MAX_MONEY.value));
-        assertEquals(MAX_MONEY.negate(), valueOf(MAX_MONEY.value * -1));
-        try {
-            valueOf(MAX_MONEY.value + 1);
-            org.junit.Assert.fail("should not have accepted too-great a monetary value");
-        } catch (IllegalArgumentException e) {
-        }
-        try {
-            valueOf( (MAX_MONEY.value * -1) - 1);
-            org.junit.Assert.fail("should not have accepted too-little a monetary value");
-        } catch (IllegalArgumentException e) {
-        }
+        assertEquals(params.getMaxMoney(), valueOf(params.getMaxMoney().value));
+        assertEquals(params.getMaxMoney().negate(), valueOf(params.getMaxMoney().value * -1));
 
         try {
             valueOf(1, -1);
@@ -116,10 +108,6 @@ public class CoinTest {
         assertEquals("54321.12345", parseCoin("54321.12345").toPlainString());
         assertEquals("654321.123456", parseCoin("654321.123456").toPlainString());
         assertEquals("7654321.1234567", parseCoin("7654321.1234567").toPlainString());
-        try {
-            assertEquals("87654321.12345678", parseCoin("87654321.12345678").toPlainString());
-            Assert.fail();  // More than MAX_MONEY
-        } catch (Exception e) {}
 
         // check there are no trailing zeros
         assertEquals("1", parseCoin("1.0").toPlainString());
