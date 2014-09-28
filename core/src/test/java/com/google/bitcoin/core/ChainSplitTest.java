@@ -141,7 +141,7 @@ public class ChainSplitTest {
         //                  \-> b3 -> b4
         // We lost some coins! b2 is no longer a part of the best chain so our available balance should drop to 50.
         // It's now pending reconfirmation.
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
         // ... and back to the first chain.
         Block b5 = b2.createNextBlock(coinsTo);
         Block b6 = b5.createNextBlock(coinsTo);
@@ -173,7 +173,7 @@ public class ChainSplitTest {
         assertTrue(chain.add(b3));
         assertEquals(Coin.ZERO, wallet.getBalance());
         assertTrue(chain.add(b4));
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
     }
 
     @Test
@@ -181,7 +181,7 @@ public class ChainSplitTest {
         // Check that we can handle our own spends being rolled back by a fork.
         Block b1 = unitTestParams.getGenesisBlock().createNextBlock(coinsTo);
         chain.add(b1);
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
         Address dest = new ECKey().toAddress(unitTestParams);
         Transaction spend = wallet.createSend(dest, valueOf(10, 0));
         wallet.commitTx(spend);
@@ -215,9 +215,9 @@ public class ChainSplitTest {
         // keys are being shared between wallets.
         Block b1 = unitTestParams.getGenesisBlock().createNextBlock(coinsTo);
         chain.add(b1);
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
         Address dest = new ECKey().toAddress(unitTestParams);
-        Transaction spend = wallet.createSend(dest, FIFTY_COINS);
+        Transaction spend = wallet.createSend(dest, wallet.getParams().getGenesisBlockValue());
         // We do NOT confirm the spend here. That means it's not considered to be pending because createSend is
         // stateless. For our purposes it is as if some other program with our keys created the tx.
         //
@@ -246,7 +246,7 @@ public class ChainSplitTest {
         Block b1 = unitTestParams.getGenesisBlock().createNextBlock(coinsTo);
         chain.add(b1);
         final Transaction t = b1.transactions.get(1);
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
         // genesis -> b1
         //         -> b2
         Block b2 = unitTestParams.getGenesisBlock().createNextBlock(coinsTo);
@@ -256,13 +256,13 @@ public class ChainSplitTest {
         b2.addTransaction(t);
         b2.solve();
         chain.add(roundtrip(b2));
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
         assertTrue(wallet.isConsistent());
         assertEquals(2, wallet.getTransaction(t.getHash()).getAppearsInHashes().size());
         //          -> b2 -> b3
         Block b3 = b2.createNextBlock(someOtherGuy);
         chain.add(b3);
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
 
     }
 
@@ -286,7 +286,7 @@ public class ChainSplitTest {
         b3.addTransaction(b2.transactions.get(1));
         b3.solve();
         chain.add(roundtrip(b3));
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(wallet.getParams().getGenesisBlockValue(), wallet.getBalance());
     }
 
     @Test
@@ -599,7 +599,7 @@ public class ChainSplitTest {
             chain.add(firstTip);
         }
         // ... and spend.
-        Transaction fodder = wallet.createSend(new ECKey().toAddress(unitTestParams), FIFTY_COINS);
+        Transaction fodder = wallet.createSend(new ECKey().toAddress(unitTestParams), wallet.getParams().getGenesisBlockValue());
         wallet.commitTx(fodder);
         final AtomicBoolean fodderIsDead = new AtomicBoolean(false);
         fodder.getConfidence().addEventListener(new TransactionConfidence.Listener() {

@@ -108,7 +108,7 @@ public class TransactionBroadcastTest extends TestWithPeerGroup {
         Block b1 = FakeTxBuilder.makeSolvedTestBlock(blockStore, address);
         inbound(p1, b1);
         assertNull(outbound(p1));
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(params.getGenesisBlockValue(), wallet.getBalance());
 
         // Now create a spend, and expect the announcement on p1.
         Address dest = new ECKey().toAddress(params);
@@ -148,7 +148,7 @@ public class TransactionBroadcastTest extends TestWithPeerGroup {
         inbound(p1, b1);
         pingAndWait(p1);
         assertNull(outbound(p1));
-        assertEquals(FIFTY_COINS, wallet.getBalance());
+        assertEquals(params.getGenesisBlockValue(), wallet.getBalance());
 
         // Check that the wallet informs us of changes in confidence as the transaction ripples across the network.
         final Transaction[] transactions = new Transaction[1];

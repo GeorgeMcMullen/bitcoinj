@@ -97,6 +97,8 @@ public abstract class NetworkParameters implements Serializable {
         genesisBlock = createGenesis(this);
     }
 
+    protected Coin genesisBlockValue = FIFTY_COINS;
+    
     private static Block createGenesis(NetworkParameters n) {
         Block genesisBlock = new Block(n);
         Transaction t = new Transaction(n);
@@ -111,7 +113,7 @@ public abstract class NetworkParameters implements Serializable {
             Script.writeBytes(scriptPubKeyBytes, Utils.HEX.decode
                     ("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f"));
             scriptPubKeyBytes.write(ScriptOpCodes.OP_CHECKSIG);
-            t.addOutput(new TransactionOutput(n, t, FIFTY_COINS, scriptPubKeyBytes.toByteArray()));
+            t.addOutput(new TransactionOutput(n, t, n.getGenesisBlockValue(), scriptPubKeyBytes.toByteArray()));
         } catch (Exception e) {
             // Cannot happen.
             throw new RuntimeException(e);
@@ -299,6 +301,11 @@ public abstract class NetworkParameters implements Serializable {
         return genesisBlock;
     }
 
+    /** Returns the number of coins that were in the genesis block */
+    public Coin getGenesisBlockValue() {
+    	return genesisBlockValue;
+    }
+    
     /** Default TCP port on which to connect to nodes. */
     public int getPort() {
         return port;
