@@ -203,6 +203,19 @@ public abstract class NetworkParameters implements Serializable {
     }
 
     /**
+     * Returns all networks that are integrated. This may be resource intensive if there are many networks
+     * configured, and may cause conflicts for different networks if one uses the same address version
+     * as another.
+     */
+    public static NetworkParameters[] getAllNetworks() {
+    	NetworkParameters[] networks = {
+    			TestNet3Params.get(),
+    			MainNetParams.get()
+    	};
+    	return networks;
+    }
+
+    /**
      * A Java package style string acting as unique ID for these parameters
      */
     public String getId() {

@@ -123,8 +123,7 @@ public class Address extends VersionedChecksummedBytes {
      */
     @Nullable
     public NetworkParameters getParameters() {
-        // TODO: There should be a more generic way to get all supported networks.
-        NetworkParameters[] networks = { TestNet3Params.get(), MainNetParams.get() };
+        NetworkParameters[] networks = NetworkParameters.getAllNetworks();
         for (NetworkParameters params : networks) {
             if (isAcceptableVersion(params, version)) {
                 return params;
