@@ -30,6 +30,7 @@ public class RegTestParams extends TestNet2Params {
 
     public RegTestParams() {
         super();
+        testNetwork = true;
         interval = 10000;
         maxTarget = MAX_TARGET;
         subsidyDecreaseBlockCount = 150;

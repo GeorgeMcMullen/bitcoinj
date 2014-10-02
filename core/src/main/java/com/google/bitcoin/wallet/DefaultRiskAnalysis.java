@@ -157,7 +157,7 @@ public class DefaultRiskAnalysis implements RiskAnalysis {
     private Result analyzeIsStandard() {
         // The IsStandard rules don't apply on testnet, because they're just a safety mechanism and we don't want to
         // crush innovation with valueless test coins.
-        if (!wallet.getNetworkParameters().getId().equals(NetworkParameters.ID_MAINNET))
+        if (wallet.getNetworkParameters().isTestNetwork())
             return Result.OK;
 
         RuleViolation ruleViolation = isStandard(tx);

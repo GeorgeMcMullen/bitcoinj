@@ -65,6 +65,8 @@ public abstract class NetworkParameters implements Serializable {
     /** The string used by the payment protocol to represent the test net. */
     public static final String PAYMENT_PROTOCOL_ID_TESTNET = "test";
 
+    protected boolean testNetwork = false;
+    
     protected Block genesisBlock;
     protected BigInteger maxTarget;
     protected int port;
@@ -294,6 +296,11 @@ public abstract class NetworkParameters implements Serializable {
         return Objects.hashCode(getId());
     }
 
+    /** Returns whether or not the given network is a test network */
+    public boolean isTestNetwork() {
+    	return testNetwork;
+    }
+    
     /** Returns the network parameters for the given string ID or NULL if not recognized. */
     @Nullable
     public static NetworkParameters fromID(String id) {

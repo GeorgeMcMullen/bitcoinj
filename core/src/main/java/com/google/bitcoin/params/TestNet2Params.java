@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkState;
 public class TestNet2Params extends NetworkParameters {
     public TestNet2Params() {
         super();
+        testNetwork = true;
         id = ID_TESTNET;
         packetMagic = 0xfabfb5daL;
         port = 18333;

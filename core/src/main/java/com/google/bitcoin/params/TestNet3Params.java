@@ -29,6 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 public class TestNet3Params extends NetworkParameters {
     public TestNet3Params() {
         super();
+        testNetwork = true;
         id = ID_TESTNET;
         // Genesis hash is 000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943
         packetMagic = 0x0b110907;

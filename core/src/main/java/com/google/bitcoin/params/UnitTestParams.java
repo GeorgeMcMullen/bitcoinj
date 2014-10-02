@@ -28,6 +28,7 @@ import java.math.BigInteger;
 public class UnitTestParams extends NetworkParameters {
     public UnitTestParams() {
         super();
+        testNetwork = true;
         id = ID_UNITTESTNET;
         packetMagic = 0x0b110907;
         addressHeader = 111;

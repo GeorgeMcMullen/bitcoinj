@@ -848,7 +848,7 @@ public abstract class AbstractBlockChain {
             // TODO: Refactor this hack after 0.5 is released and we stop supporting deserialization compatibility.
             // This should be a method of the NetworkParameters, which should in turn be using singletons and a subclass
             // for each network type. Then each network can define its own difficulty transition rules.
-            if (params.getId().equals(NetworkParameters.ID_TESTNET) && nextBlock.getTime().after(testnetDiffDate)) {
+            if (params.isTestNetwork() && nextBlock.getTime().after(testnetDiffDate)) {
                 checkTestnetDifficulty(storedPrev, prev, nextBlock);
                 return;
             }
